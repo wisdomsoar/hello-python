@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+
+#########[第19天]30天搞懂Python-使用paramiko 進行SSH連線
+#########https://ithelp.ithome.com.tw/articles/10245205
+
+##########記得安裝pip install paramiko
+import paramiko
+import time
+
+hostname = '169.254.0.1'
+port = 22
+username = 'root'
+password = ''
+
+if __name__ == "__main__":
+    
+    for i in range(9999):
+    
+
+        print('i is ' + str(i))
+
+        paramiko.util.log_to_file('paramiko.log')
+        s = paramiko.SSHClient()
+        s.load_system_host_keys()
+        ########先創這個known_hosts: ssh-keyscan server-ip >> d:\.ssh\known_hosts
+        s.load_host_keys("D:\\.ssh\\known_hosts") 
+        print "trying to connect..."
+        s.connect(hostname, port, username, password, timeout=7)
+        stdin, stdout, stderr = s.exec_command('ifconfig')
+        ifconfig_result = stdout.read()
+        print ifconfig_result
+        if "eth0" not in ifconfig_result:
+            break
+        s.exec_command('reboot -f')
+        time.sleep(18)
+        s.close()
+    print('Out of loop') 
