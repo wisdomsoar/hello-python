@@ -1,0 +1,45 @@
+
+
+
+
+O PC side: (web server by python)
+
+C:\Users\username>python -m http.server
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+
+
+
+...
+
+
+::ffff:192.168.1.1 - - [17/Jan/2024 14:14:47] "GET /filename.txt HTTP/1.1" 200 -
+
+
+
+
+
+O Device side (web client; embedded device)
+
+root@model_name:/tmp# wget http://192.168.1.196:8000/filename.txt
+Downloading 'http://192.168.1.196:8000/filename.txt'
+Connecting to 192.168.1.196:8000
+Writing to 'filename.txt'
+filename. 100% |*******************************| 84660k  0:00:00 ETA
+Download completed (86692507 bytes)
+root@model_name:/tmp#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
